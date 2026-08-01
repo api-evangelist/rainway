@@ -1,0 +1,18 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/rainway-hub-api-openapi.yml
+note: >-
+  No official/hosted Rainway MCP server was found (docs, npm @modelcontextprotocol,
+  MCP registries). This is a candidate tool list derived one-to-one from the Hub API
+  operations for a potential MCP wrapper.
+server:
+  name: rainway
+  transport: http
+tools:
+  - name: get_peers
+    description: List the active Rainway peers connected to the network for an organization.
+    source_operation: openapi/rainway-hub-api-openapi.yml#getPeers
+  - name: get_peers_count
+    description: Get the total number of active peers connected to the network for an organization.
+    source_operation: openapi/rainway-hub-api-openapi.yml#getPeersCount

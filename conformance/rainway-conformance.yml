@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rainway-hub-api-openapi.yml
+standards:
+  - id: http-basic-auth
+    conforms: true
+    evidence: securityScheme type http scheme basic (RFC 7617)
+  - id: cursor-pagination
+    conforms: true
+    evidence: limit/cursor query params + metadata.next in list responses
+  - id: oauth2
+    conforms: false
+  - id: oidc
+    conforms: false
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use a custom {metadata, traceId, error{code,description}} envelope, not application/problem+json
+  - id: json-api
+    conforms: false
+  - id: webrtc
+    conforms: true
+    evidence: the Rainway streaming runtime is built on WebRTC data channels and media streaming (SDK-level, not the Hub REST API)

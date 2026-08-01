@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rainway-hub-api-openapi.yml (ModelError schema from @rainway/api client)
+format: custom-envelope
+note: >-
+  The Rainway Hub API does not use RFC 9457 application/problem+json. Errors return a
+  JSON envelope with a request `traceId` and a nested `error` object carrying a numeric
+  `code` and a human-readable `description`, alongside the standard response `metadata`.
+envelope:
+  fields:
+    metadata: Standard response metadata (apiVersion, context).
+    traceId: Request ID for support/correlation.
+    error.code: Numeric error code.
+    error.description: Human-readable error description.
+problems:
+  - status: '4XX'
+    schema: ModelError
+    description: Client error (e.g. invalid/missing API key pair, unknown orgId, bad parameters).
+    applies_to:
+      - openapi/rainway-hub-api-openapi.yml#getPeers
+      - openapi/rainway-hub-api-openapi.yml#getPeersCount
+  - status: '5XX'
+    schema: ModelError
+    description: Server error.
+    applies_to:
+      - openapi/rainway-hub-api-openapi.yml#getPeers
+      - openapi/rainway-hub-api-openapi.yml#getPeersCount

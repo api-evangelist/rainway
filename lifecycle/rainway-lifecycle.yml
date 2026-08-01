@@ -1,0 +1,19 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.rainway.com/docs/api-getting-started, https://rainway.statuspage.io,
+  and openapi/rainway-hub-api-openapi.yml
+versioning:
+  scheme: uri-path
+  current: v0
+  detail: API version carried in the URL path (/v0); echoed as metadata.apiVersion in responses.
+  docs: https://docs.rainway.com/docs/api-getting-started
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No deprecation policy or RFC 8594 Sunset/Deprecation header support documented.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://rainway.statuspage.io
+deprecated_operations: []

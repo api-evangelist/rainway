@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: searched
+note: >-
+  Probed /.well-known/ discovery paths on the Rainway hosts. The API host
+  (hub-api.rainway.com) returns Cloudflare 301 redirects for these paths (no real
+  documents), and rainway.com now resolves to an unrelated 6over3 single-page app whose
+  catch-all returns the SPA shell for every path. No genuine well-known documents are
+  published. Absence is a valid, recorded result.
+hosts:
+  - host: https://hub-api.rainway.com
+    documents:
+      - { path: /.well-known/security.txt, status: 301, file: null }
+      - { path: /.well-known/openid-configuration, status: 301, file: null }
+      - { path: /.well-known/oauth-authorization-server, status: 301, file: null }
+      - { path: /.well-known/api-catalog, status: 301, file: null }
+      - { path: /.well-known/ai-plugin.json, status: 301, file: null }
+  - host: https://docs.rainway.com
+    documents:
+      - { path: /.well-known/security.txt, status: 404, file: null }
+      - { path: /.well-known/openid-configuration, status: 404, file: null }
+      - { path: /.well-known/oauth-authorization-server, status: 404, file: null }
+      - { path: /.well-known/api-catalog, status: 404, file: null }
+      - { path: /.well-known/ai-plugin.json, status: 404, file: null }

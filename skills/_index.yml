@@ -1,0 +1,7 @@
+generated: '2026-07-20'
+method: generated
+skills:
+  - file: rainway-list-network-peers.md
+    name: List Rainway network peers
+    api: openapi/rainway-hub-api-openapi.yml
+    operations: [getPeers, getPeersCount]

@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rainway-hub-api-openapi.yml
+entities:
+  - name: Organization
+    id_field: orgId
+    description: >-
+      An account/organization in the Rainway Hub. The orgId is found in the URL bar when
+      logged into the Rainway Hub and scopes all peer queries.
+  - name: Peer
+    description: >-
+      A device/application connected to the Rainway Network under an organization.
+    fields:
+      id: Peer ID with an 'n' suffix (trim the last character to get a connectable ID; BigInt in JS).
+      externalId: Application-recognizable string tying the peer back to a user.
+      connectionDate: Date the peer connected to the network.
+relationships:
+  - from: Peer
+    to: Organization
+    type: belongs_to
+    via: orgId
+    evidence: peers are queried under /orgs/{orgId}/peers

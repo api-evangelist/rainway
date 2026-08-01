@@ -1,0 +1,14 @@
+{
+  "provider": "rainway",
+  "sources": [
+    "rainway-peers-api-openapi.yml"
+  ],
+  "outputs": [
+    "rainway-peers-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

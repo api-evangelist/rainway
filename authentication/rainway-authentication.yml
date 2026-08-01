@@ -1,0 +1,14 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/rainway-hub-api-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic authentication using a Rainway API Key Pair — username is the public
+    key (pk_live_...), password is the secret key (sk_live_...).
+  sources:
+  - openapi/rainway-hub-api-openapi.yml

@@ -1,0 +1,48 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  npm registry (@rainway scope + rainway-sdk), NuGet (Rainway.Api), and
+  https://docs.rainway.com/docs/api-getting-started
+packages:
+  - language: javascript
+    registry: npm
+    name: "@rainway/web"
+    url: https://www.npmjs.com/package/@rainway/web
+    install: npm install @rainway/web
+    description: Runtime for the Rainway Web SDK (browser-based interactive app stream receiver).
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@rainway/react"
+    url: https://www.npmjs.com/package/@rainway/react
+    install: npm install @rainway/react
+    description: React components for use with the Rainway Web SDK.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@rainway/native"
+    url: https://www.npmjs.com/package/@rainway/native
+    install: npm install @rainway/native
+    description: The Rainway SDK native runtime for Node.js.
+    official: true
+  - language: javascript
+    registry: npm
+    name: "@rainway/api"
+    url: https://www.npmjs.com/package/@rainway/api
+    install: npm install @rainway/api
+    description: Generated OpenAPI client (TypeScript/axios) for the Rainway Hub API.
+    official: true
+  - language: javascript
+    registry: npm
+    name: rainway-sdk
+    url: https://www.npmjs.com/package/rainway-sdk
+    install: npm install rainway-sdk
+    description: Original web runtime for the Rainway SDK (superseded by @rainway/web).
+    official: true
+  - language: csharp
+    registry: nuget
+    name: Rainway.Api
+    url: https://www.nuget.org/packages/Rainway.Api/
+    install: Install-Package Rainway.Api
+    description: Generated C#/.NET client for the Rainway Hub API.
+    official: true

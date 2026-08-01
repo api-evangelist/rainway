@@ -1,25 +1,115 @@
 aid: rainway
 name: Rainway
-description: Rainway is a company surfaced as a portfolio company of bullpen-capital and added to the
-  API Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  Rainway is a developer platform for interactive application streaming, letting you
+  embed and run native apps anywhere in a few lines of code. Its Stream SDK is built on
+  WebRTC and ships runtimes for the Web, React, Node.js (native), .NET and C++, handling
+  secure peer connections, low-latency media streaming, network adaptation and input.
+  A small RESTful Hub API exposes the active peers connected to the Rainway Network,
+  authenticated with an API key pair, for building multi-peer architectures. Rainway
+  originated as a consumer game-streaming app (2017; consumer app wound down in 2022) and
+  pivoted to the Stream SDK; the docs, Hub, and published packages remain live.
 url: https://raw.githubusercontent.com/api-evangelist/rainway/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://avatars.githubusercontent.com/u/25223986?v=4
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - bullpen-capital
 x-tier: stub
 x-tier-reason: portfolio-lead
+x-status-note: >-
+  Consumer game-streaming app shut down 2022-10-26; company pivoted to the Stream SDK.
+  rainway.com currently redirects to an unrelated 6over3 site, but docs.rainway.com,
+  hub.rainway.com and the @rainway npm/NuGet packages are live as of 2026-07.
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1
 tags:
 - Company
-apis: []
+- Streaming
+- Application Streaming
+- WebRTC
+- Game Streaming
+- SDK
+- Real-Time
+- Developer Platform
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: rainway:rainway-peers-api
+  name: Rainway Peers API
+  description: Access active Rainway peers connected to the Rainway Network.
+  humanURL: https://docs.rainway.com/docs/api-getting-started
+  baseURL: https://hub-api.rainway.com/v0
+  tags:
+  - Peers
+  properties:
+  - type: OpenAPI
+    url: openapi/rainway-peers-api-openapi.yml
+  - type: APIReference
+    url: https://docs.rainway.com/reference/getpeers
 common:
 - type: Website
-  url: https://rainway.com
+  url: https://docs.rainway.com
+- type: DeveloperPortal
+  url: https://docs.rainway.com
+- type: Documentation
+  url: https://docs.rainway.com/docs/what-is-rainway
+- type: GettingStarted
+  url: https://docs.rainway.com/docs/api-getting-started
+- type: APIReference
+  url: https://docs.rainway.com/reference/getpeers
+- type: SignUp
+  url: https://hub.rainway.com
+- type: GitHubOrganization
+  url: https://github.com/RainwayApp
+- type: StatusPage
+  url: https://rainway.statuspage.io
+- type: Packages
+  url: packages/rainway-packages.yml
+- type: SDKs
+  url: packages/rainway-packages.yml
+- type: Authentication
+  url: authentication/rainway-authentication.yml
+- type: Conventions
+  url: conventions/rainway-conventions.yml
+- type: ErrorCatalog
+  url: errors/rainway-problem-types.yml
+- type: DataModel
+  url: data-model/rainway-data-model.yml
+- type: Lifecycle
+  url: lifecycle/rainway-lifecycle.yml
+- type: Conformance
+  url: conformance/rainway-conformance.yml
+- type: MCPServer
+  url: mcp/rainway-mcp.yml
+- type: Overlay
+  url: overlays/rainway-hub-api-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/rainway-llms.txt
+- type: DomainSecurity
+  url: security/rainway-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/rainway-agentic-access.yml

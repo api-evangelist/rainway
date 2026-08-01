@@ -1,0 +1,51 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  https://docs.rainway.com/docs/api-getting-started and the @rainway/api
+  generated client (envelope + pagination shapes)
+authentication:
+  style: http-basic
+  detail: >-
+    Basic access authentication with a Rainway API Key Pair — username is the public
+    key (pk_live_...), password is the secret key (sk_live_...). Keys are generated in
+    the Rainway Hub (https://hub.rainway.com/keys).
+  ref: authentication/rainway-authentication.yml
+idempotency:
+  supported: false
+  note: The public Hub API is read-only (GET only), so no idempotency contract is documented.
+pagination:
+  style: cursor
+  params:
+    limit: The maximum number of items to return (0-100, default 100).
+    cursor: The position the results start from.
+  response_fields:
+    metadata.limit: Echo of the requested limit.
+    metadata.cursor: Cursor position of this page.
+    metadata.next: URL to the next page of results.
+    metadata.totalItems: Total number of items available.
+  location: body.value.metadata (list endpoints)
+response_envelope:
+  shape: >-
+    Every response is wrapped in a top-level object with `metadata` (apiVersion,
+    context) and `body` (a discriminated `{discriminator, value}` union). List payloads
+    live at body.value; peer arrays at body.value.peers.
+  fields:
+    metadata.apiVersion: The version of the API.
+    metadata.context: Client-supplied echo string (request/response correlation).
+request_tracing:
+  mechanism: context
+  detail: >-
+    Clients may pass an arbitrary `context` query string that the server echoes back in
+    `metadata.context`, enabling client-side correlation. Error responses also carry a
+    `traceId` (request ID).
+error_envelope:
+  shape: "{ metadata, traceId, error: { code, description } }"
+  ref: errors/rainway-problem-types.yml
+versioning:
+  scheme: uri-path
+  current: v0
+  detail: The API version is carried in the URL path (/v0) and echoed as metadata.apiVersion.
+  ref: lifecycle/rainway-lifecycle.yml
+rate_limit_signaling:
+  documented: false
+  note: No rate-limit headers or policy documented for the public Hub API.

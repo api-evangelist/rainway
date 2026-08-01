@@ -1,0 +1,17 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Rainway Hub API
+  version: 1.0.0
+extends: openapi/rainway-hub-api-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-notes: >-
+        Reconstructed from the first-party @rainway/api generated client and public docs.
+        Read-only Peers API; HTTP Basic auth with pk_live/sk_live key pair.
+      x-provider-status: >-
+        Rainway shut down its consumer game-streaming app in Oct 2022 and pivoted to the
+        Stream SDK; docs and packages remain live as of 2026-07.
+  - target: $.tags[?(@.name=='Peers')]
+    update:
+      x-agent-note: Both operations are safe read-only lookups scoped to an orgId.

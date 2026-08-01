@@ -1,0 +1,190 @@
+openapi: 3.0.3
+x-provenance:
+  generated: '2026-07-20'
+  method: derived
+  source: npm @rainway/api@0.2.3 (first-party OpenAPI-generated TypeScript/axios client)
+  note: >-
+    Faithfully reconstructed from Rainway's own generated API client (@rainway/api,
+    author "Rainway, Inc.") and the public API getting-started docs at
+    https://docs.rainway.com/docs/api-getting-started. Operations, parameters,
+    schemas, base URL and auth are taken verbatim from the client; nothing invented.
+info:
+  title: Rainway Hub API
+  version: v0
+  description: >-
+    The Rainway Hub API is a small RESTful API that provides programmatic access to
+    the active Rainway peers connected to the Rainway Network. It is intended as a
+    building block for multi-peer architectures (e.g. enumerating cloud-hosted
+    applications connected as peers so a user can be presented a list of available
+    applications to connect to). Authentication uses HTTP Basic access authentication
+    with a Rainway API Key Pair (public key as username, secret key as password),
+    generated via the Rainway Hub.
+  contact:
+    name: Rainway
+    url: https://docs.rainway.com/docs/api-getting-started
+servers:
+  - url: https://hub-api.rainway.com/v0
+    description: Production
+security:
+  - basicAuth: []
+tags:
+  - name: Peers
+    description: Access active Rainway peers connected to the Rainway Network.
+paths:
+  /orgs/{orgId}/peers:
+    get:
+      operationId: getPeers
+      summary: Peers
+      description: Retrieve the active peers connected to the Rainway Network for an organization.
+      tags: [Peers]
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          description: The ID of the organization to retrieve peers for.
+          schema: { type: string }
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of items to return (0-100, default 100).
+          schema: { type: integer, minimum: 0, maximum: 100, default: 100 }
+        - name: cursor
+          in: query
+          required: false
+          description: The position the results start from.
+          schema: { type: integer }
+        - name: context
+          in: query
+          required: false
+          description: An arbitrary string that will be returned with the response.
+          schema: { type: string }
+      responses:
+        '200':
+          description: A page of peers.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/InlineResponse200' }
+        '4XX':
+          description: Client error.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ModelError' }
+        '5XX':
+          description: Server error.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ModelError' }
+  /orgs/{orgId}/peers/count:
+    get:
+      operationId: getPeersCount
+      summary: Peer count
+      description: Retrieve the total number of active peers connected to the Rainway Network for an organization.
+      tags: [Peers]
+      parameters:
+        - name: orgId
+          in: path
+          required: true
+          description: The ID of the organization to retrieve peers for.
+          schema: { type: string }
+        - name: context
+          in: query
+          required: false
+          description: Arbitrary string that will be returned with the response.
+          schema: { type: string }
+      responses:
+        '200':
+          description: The peer count.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/InlineResponse2001' }
+        '4XX':
+          description: Client error.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ModelError' }
+        '5XX':
+          description: Server error.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/ModelError' }
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic authentication using a Rainway API Key Pair — username is the
+        public key (pk_live_...), password is the secret key (sk_live_...).
+  schemas:
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: >-
+            Peer ID with an 'n' suffix. Trim the last character to get a connectable ID.
+            In JavaScript, parsing to a number will require use of BigInt.
+        externalId:
+          type: string
+          description: An identifying string that an application can recognize and tie back to a user.
+        connectionDate:
+          type: string
+          description: Date the peer was connected to the network.
+    ListMetadata:
+      type: object
+      properties:
+        limit: { type: integer, description: The maximum number of items to return }
+        next: { type: string, description: The URL to the next page of results }
+        cursor: { type: integer, description: The position the results start from }
+        totalItems: { type: integer, description: The total number of items available }
+    Metadata:
+      type: object
+      properties:
+        apiVersion: { type: string, description: The version of the API }
+        context:
+          type: string
+          description: >-
+            Client sets this value and server places it into the response. If the client
+            doesn't have a need for this field it may be set to an empty string or omitted.
+    InlineResponse200BodyValue:
+      type: object
+      properties:
+        metadata: { $ref: '#/components/schemas/ListMetadata' }
+        peers:
+          type: array
+          items: { $ref: '#/components/schemas/Peer' }
+    InlineResponse200Body:
+      type: object
+      properties:
+        discriminator: { type: integer }
+        value: { $ref: '#/components/schemas/InlineResponse200BodyValue' }
+    InlineResponse200:
+      type: object
+      properties:
+        metadata: { $ref: '#/components/schemas/Metadata' }
+        body: { $ref: '#/components/schemas/InlineResponse200Body' }
+    InlineResponse2001BodyValue:
+      type: object
+      properties:
+        totalItems: { type: integer }
+    InlineResponse2001Body:
+      type: object
+      properties:
+        discriminator: { type: integer }
+        value: { $ref: '#/components/schemas/InlineResponse2001BodyValue' }
+    InlineResponse2001:
+      type: object
+      properties:
+        metadata: { $ref: '#/components/schemas/Metadata' }
+        body: { $ref: '#/components/schemas/InlineResponse2001Body' }
+    ErrorError:
+      type: object
+      properties:
+        code: { type: integer, description: Error code }
+        description: { type: string, description: Error description }
+    ModelError:
+      type: object
+      properties:
+        metadata: { $ref: '#/components/schemas/Metadata' }
+        traceId: { type: string, description: Request ID }
+        error: { $ref: '#/components/schemas/ErrorError' }
