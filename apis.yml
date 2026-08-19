@@ -33,7 +33,7 @@ x-status-note: >-
   Consumer game-streaming app shut down 2022-10-26; company pivoted to the Stream SDK.
   rainway.com currently redirects to an unrelated 6over3 site, but docs.rainway.com,
   hub.rainway.com and the @rainway npm/NuGet packages are live as of 2026-07.
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-20'
 x-enrichment:
