@@ -1,0 +1,87 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Rainway Hub Peers API",
+    "version": "v0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Peers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://hub-api.rainway.com/v0/orgs/:orgId/peers",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to retrieve peers for."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of items to return (0-100, default 100)."
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "The position the results start from."
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "An arbitrary string that will be returned with the response."
+              }
+            ]
+          },
+          "docs": "Retrieve the active peers connected to the Rainway Network for an organization."
+        },
+        {
+          "info": {
+            "name": "Peer count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://hub-api.rainway.com/v0/orgs/:orgId/peers/count",
+            "params": [
+              {
+                "name": "orgId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the organization to retrieve peers for."
+              },
+              {
+                "name": "context",
+                "value": "",
+                "type": "query",
+                "description": "Arbitrary string that will be returned with the response."
+              }
+            ]
+          },
+          "docs": "Retrieve the total number of active peers connected to the Rainway Network for an organization."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
