@@ -1,0 +1,28 @@
+# Front Door AI Index — rainway — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: rainway
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: docs.rainway.com
+  final_host: docs.rainway.com
+  ownership: own
+  owner: rainway
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 3
+  host_score: 3
+  density: 29.7
+  words: 101
+  tiers:
+    agentic: 2
+    core: 1
+    model: 0
+  ambiguous: 1
+  top_terms:
+    AI agent: 1
+    AI: 1
+    agent: 1
+    llms.txt: 1

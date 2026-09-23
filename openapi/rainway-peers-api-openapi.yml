@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Rainway Hub Peers API
   version: v0
-  description: The Rainway Hub API is a small RESTful API that provides programmatic access to the active Rainway peers connected to the Rainway Network. It is intended as a building block for multi-peer architectures (e.g. enumerating cloud-hosted applications connected as peers so a user can be presented a list of available applications to connect to). Authentication uses HTTP Basic access authentication with a Rainway API Key Pair (public key as username, secret key as password), generated via the Rainway Hub.
+  description: The Rainway Hub API is a small RESTful API that provides programmatic access to the active Rainway peers connected to the Rainway Network.
   contact:
     name: Rainway
     url: https://docs.rainway.com/docs/api-getting-started
@@ -110,36 +110,6 @@ paths:
                 $ref: '#/components/schemas/ModelError'
 components:
   schemas:
-    Metadata:
-      type: object
-      properties:
-        apiVersion:
-          type: string
-          description: The version of the API
-        context:
-          type: string
-          description: Client sets this value and server places it into the response. If the client doesn't have a need for this field it may be set to an empty string or omitted.
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Error code
-        description:
-          type: string
-          description: Error description
-    InlineResponse2001Body:
-      type: object
-      properties:
-        discriminator:
-          type: integer
-        value:
-          $ref: '#/components/schemas/InlineResponse2001BodyValue'
-    InlineResponse2001BodyValue:
-      type: object
-      properties:
-        totalItems:
-          type: integer
     ListMetadata:
       type: object
       properties:
@@ -155,13 +125,41 @@ components:
         totalItems:
           type: integer
           description: The total number of items available
-    InlineResponse200:
+    InlineResponse2001:
       type: object
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
         body:
-          $ref: '#/components/schemas/InlineResponse200Body'
+          $ref: '#/components/schemas/InlineResponse2001Body'
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        description:
+          type: string
+          description: Error description
+    InlineResponse200Body:
+      type: object
+      properties:
+        discriminator:
+          type: integer
+        value:
+          $ref: '#/components/schemas/InlineResponse200BodyValue'
+    InlineResponse2001BodyValue:
+      type: object
+      properties:
+        totalItems:
+          type: integer
+    InlineResponse2001Body:
+      type: object
+      properties:
+        discriminator:
+          type: integer
+        value:
+          $ref: '#/components/schemas/InlineResponse2001BodyValue'
     ModelError:
       type: object
       properties:
@@ -172,13 +170,15 @@ components:
           description: Request ID
         error:
           $ref: '#/components/schemas/ErrorError'
-    InlineResponse200Body:
+    InlineResponse200BodyValue:
       type: object
       properties:
-        discriminator:
-          type: integer
-        value:
-          $ref: '#/components/schemas/InlineResponse200BodyValue'
+        metadata:
+          $ref: '#/components/schemas/ListMetadata'
+        peers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Peer'
     Peer:
       type: object
       properties:
@@ -191,22 +191,22 @@ components:
         connectionDate:
           type: string
           description: Date the peer was connected to the network.
-    InlineResponse200BodyValue:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ListMetadata'
-        peers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Peer'
-    InlineResponse2001:
+    InlineResponse200:
       type: object
       properties:
         metadata:
           $ref: '#/components/schemas/Metadata'
         body:
-          $ref: '#/components/schemas/InlineResponse2001Body'
+          $ref: '#/components/schemas/InlineResponse200Body'
+    Metadata:
+      type: object
+      properties:
+        apiVersion:
+          type: string
+          description: The version of the API
+        context:
+          type: string
+          description: Client sets this value and server places it into the response. If the client doesn't have a need for this field it may be set to an empty string or omitted.
   securitySchemes:
     basicAuth:
       type: http
