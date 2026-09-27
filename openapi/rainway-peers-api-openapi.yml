@@ -110,21 +110,18 @@ paths:
                 $ref: '#/components/schemas/ModelError'
 components:
   schemas:
-    ListMetadata:
+    Peer:
       type: object
       properties:
-        limit:
-          type: integer
-          description: The maximum number of items to return
-        next:
+        id:
           type: string
-          description: The URL to the next page of results
-        cursor:
-          type: integer
-          description: The position the results start from
-        totalItems:
-          type: integer
-          description: The total number of items available
+          description: Peer ID with an 'n' suffix. Trim the last character to get a connectable ID. In JavaScript, parsing to a number will require use of BigInt.
+        externalId:
+          type: string
+          description: An identifying string that an application can recognize and tie back to a user.
+        connectionDate:
+          type: string
+          description: Date the peer was connected to the network.
     InlineResponse2001:
       type: object
       properties:
@@ -132,6 +129,21 @@ components:
           $ref: '#/components/schemas/Metadata'
         body:
           $ref: '#/components/schemas/InlineResponse2001Body'
+    ModelError:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        traceId:
+          type: string
+          description: Request ID
+        error:
+          $ref: '#/components/schemas/ErrorError'
+    InlineResponse2001BodyValue:
+      type: object
+      properties:
+        totalItems:
+          type: integer
     ErrorError:
       type: object
       properties:
@@ -148,11 +160,6 @@ components:
           type: integer
         value:
           $ref: '#/components/schemas/InlineResponse200BodyValue'
-    InlineResponse2001BodyValue:
-      type: object
-      properties:
-        totalItems:
-          type: integer
     InlineResponse2001Body:
       type: object
       properties:
@@ -160,16 +167,6 @@ components:
           type: integer
         value:
           $ref: '#/components/schemas/InlineResponse2001BodyValue'
-    ModelError:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        traceId:
-          type: string
-          description: Request ID
-        error:
-          $ref: '#/components/schemas/ErrorError'
     InlineResponse200BodyValue:
       type: object
       properties:
@@ -179,18 +176,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Peer'
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Peer ID with an 'n' suffix. Trim the last character to get a connectable ID. In JavaScript, parsing to a number will require use of BigInt.
-        externalId:
-          type: string
-          description: An identifying string that an application can recognize and tie back to a user.
-        connectionDate:
-          type: string
-          description: Date the peer was connected to the network.
     InlineResponse200:
       type: object
       properties:
@@ -207,6 +192,21 @@ components:
         context:
           type: string
           description: Client sets this value and server places it into the response. If the client doesn't have a need for this field it may be set to an empty string or omitted.
+    ListMetadata:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: The maximum number of items to return
+        next:
+          type: string
+          description: The URL to the next page of results
+        cursor:
+          type: integer
+          description: The position the results start from
+        totalItems:
+          type: integer
+          description: The total number of items available
   securitySchemes:
     basicAuth:
       type: http
