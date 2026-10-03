@@ -110,49 +110,6 @@ paths:
                 $ref: '#/components/schemas/ModelError'
 components:
   schemas:
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Peer ID with an 'n' suffix. Trim the last character to get a connectable ID. In JavaScript, parsing to a number will require use of BigInt.
-        externalId:
-          type: string
-          description: An identifying string that an application can recognize and tie back to a user.
-        connectionDate:
-          type: string
-          description: Date the peer was connected to the network.
-    InlineResponse2001:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        body:
-          $ref: '#/components/schemas/InlineResponse2001Body'
-    ModelError:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        traceId:
-          type: string
-          description: Request ID
-        error:
-          $ref: '#/components/schemas/ErrorError'
-    InlineResponse2001BodyValue:
-      type: object
-      properties:
-        totalItems:
-          type: integer
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: integer
-          description: Error code
-        description:
-          type: string
-          description: Error description
     InlineResponse200Body:
       type: object
       properties:
@@ -160,29 +117,6 @@ components:
           type: integer
         value:
           $ref: '#/components/schemas/InlineResponse200BodyValue'
-    InlineResponse2001Body:
-      type: object
-      properties:
-        discriminator:
-          type: integer
-        value:
-          $ref: '#/components/schemas/InlineResponse2001BodyValue'
-    InlineResponse200BodyValue:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ListMetadata'
-        peers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Peer'
-    InlineResponse200:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        body:
-          $ref: '#/components/schemas/InlineResponse200Body'
     Metadata:
       type: object
       properties:
@@ -192,6 +126,29 @@ components:
         context:
           type: string
           description: Client sets this value and server places it into the response. If the client doesn't have a need for this field it may be set to an empty string or omitted.
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: Error code
+        description:
+          type: string
+          description: Error description
+    InlineResponse2001Body:
+      type: object
+      properties:
+        discriminator:
+          type: integer
+        value:
+          $ref: '#/components/schemas/InlineResponse2001BodyValue'
+    InlineResponse200:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        body:
+          $ref: '#/components/schemas/InlineResponse200Body'
     ListMetadata:
       type: object
       properties:
@@ -207,6 +164,49 @@ components:
         totalItems:
           type: integer
           description: The total number of items available
+    InlineResponse2001:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        body:
+          $ref: '#/components/schemas/InlineResponse2001Body'
+    InlineResponse2001BodyValue:
+      type: object
+      properties:
+        totalItems:
+          type: integer
+    InlineResponse200BodyValue:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ListMetadata'
+        peers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Peer'
+    ModelError:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        traceId:
+          type: string
+          description: Request ID
+        error:
+          $ref: '#/components/schemas/ErrorError'
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Peer ID with an 'n' suffix. Trim the last character to get a connectable ID. In JavaScript, parsing to a number will require use of BigInt.
+        externalId:
+          type: string
+          description: An identifying string that an application can recognize and tie back to a user.
+        connectionDate:
+          type: string
+          description: Date the peer was connected to the network.
   securitySchemes:
     basicAuth:
       type: http
