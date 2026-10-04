@@ -110,6 +110,35 @@ paths:
                 $ref: '#/components/schemas/ModelError'
 components:
   schemas:
+    ModelError:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        traceId:
+          type: string
+          description: Request ID
+        error:
+          $ref: '#/components/schemas/ErrorError'
+    InlineResponse2001:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        body:
+          $ref: '#/components/schemas/InlineResponse2001Body'
+    Peer:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Peer ID with an 'n' suffix. Trim the last character to get a connectable ID. In JavaScript, parsing to a number will require use of BigInt.
+        externalId:
+          type: string
+          description: An identifying string that an application can recognize and tie back to a user.
+        connectionDate:
+          type: string
+          description: Date the peer was connected to the network.
     InlineResponse200Body:
       type: object
       properties:
@@ -117,6 +146,27 @@ components:
           type: integer
         value:
           $ref: '#/components/schemas/InlineResponse200BodyValue'
+    InlineResponse2001BodyValue:
+      type: object
+      properties:
+        totalItems:
+          type: integer
+    InlineResponse200:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        body:
+          $ref: '#/components/schemas/InlineResponse200Body'
+    InlineResponse200BodyValue:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ListMetadata'
+        peers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Peer'
     Metadata:
       type: object
       properties:
@@ -135,20 +185,6 @@ components:
         description:
           type: string
           description: Error description
-    InlineResponse2001Body:
-      type: object
-      properties:
-        discriminator:
-          type: integer
-        value:
-          $ref: '#/components/schemas/InlineResponse2001BodyValue'
-    InlineResponse200:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        body:
-          $ref: '#/components/schemas/InlineResponse200Body'
     ListMetadata:
       type: object
       properties:
@@ -164,49 +200,13 @@ components:
         totalItems:
           type: integer
           description: The total number of items available
-    InlineResponse2001:
+    InlineResponse2001Body:
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        body:
-          $ref: '#/components/schemas/InlineResponse2001Body'
-    InlineResponse2001BodyValue:
-      type: object
-      properties:
-        totalItems:
+        discriminator:
           type: integer
-    InlineResponse200BodyValue:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/ListMetadata'
-        peers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Peer'
-    ModelError:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/Metadata'
-        traceId:
-          type: string
-          description: Request ID
-        error:
-          $ref: '#/components/schemas/ErrorError'
-    Peer:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Peer ID with an 'n' suffix. Trim the last character to get a connectable ID. In JavaScript, parsing to a number will require use of BigInt.
-        externalId:
-          type: string
-          description: An identifying string that an application can recognize and tie back to a user.
-        connectionDate:
-          type: string
-          description: Date the peer was connected to the network.
+        value:
+          $ref: '#/components/schemas/InlineResponse2001BodyValue'
   securitySchemes:
     basicAuth:
       type: http
