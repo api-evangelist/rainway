@@ -1,0 +1,12 @@
+{
+ "url": "https://docs.rainway.com/openapi/63054488c189ff00a748cd78",
+ "requested_url": "https://docs.rainway.com/openapi/63054488c189ff00a748cd78",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 7070,
+ "sha256": "6776ae5683fdaa703cb940450a408bae9f4bdca33e2bf9ff5e9301ee2ab5766c",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
